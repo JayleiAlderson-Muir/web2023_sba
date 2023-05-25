@@ -1,151 +1,32 @@
-<style>
+<script>
+  const BASE_URL = `https://rickandmortyapi.com/api/character/[1,2,3,4,5,6]`;
 
-    .grid{
-        display:grid;
-        grid-template-columns:1fr 1fr 1fr;
-        gap:30px;
-    }
+  let characters;
 
-    .card{
-        background:#333;
-        overflow:hidden;
-        height:240px;
-        display:flex;      
-        border-radius:20px;  
-    }
-
-    .image{
-        width:30%;
-        background-image:url('https://rickandmortyapi.com/api/character/avatar/119.jpeg');
-        background-size:cover;
-        background-position:center;
-    }
-
-    .info{
-        padding-left:20px;
-        padding-right:20px;
-        padding-top:10px;
-        padding-bottom:15px;
-    }
-
-    .dead{
-        background:firebrick;
-        width:10px;
-        height:10px;
-        border-radius:100%;
-        margin-right:10px;
-    }
-
-    .name{
-        font-family:sans-serif;
-        color:white;
-    }
-
-    .status{
-        font-family:sans-serif;
-        color:white;
-        display:flex;
-        align-items:center;
-    }
-
-    .locationLabel{
-        color:#777;
-        font-family:sans-serif;
-        font-size:16px;
-        margin:0 0 5px;        
-    }
-
-    .location{
-        color:white;
-        font-family:sans-serif;
-        font-size:16px;
-        margin-bottom:20px;
-        margin-left:0;
-        margin-right:0;
-        margin-top:0;
-        margin-bottom:5px;
-    }
-
-    .location a{
-        color:white;
-        font-family:sans-serif;
-        font-size:16px;
-        margin-bottom:20px;
-        margin-left:0;
-        margin-right:0;
-        margin-top:0;
-        margin-bottom:5px;
-    }
-
-
-</style>
+  fetch(`${BASE_URL}?json=true`)
+    .then((res) => res.json())
+    .then((data) => {
+      characters = data;
+      console.log(characters);
+    });
+</script>
 
 <div class="grid">
-
+  {#each characters as character}
     <div class="card">
-        <div class="image"></div>
-        <div class="info">
-            <h1 class="name">Evil Rick</h1>
-            <h3 class="status"><div class="dead"></div> Dead - Humanoid</h3>
+      <div><img class="image" src={character.image} /></div>
+      <div class="info">
+        <h1 class="name">{character.name}</h1>
+        <h3 class="status">
+          <div class="dead" />
+          {character.status}
+        </h3>
 
-            <h3 class="locationLabel">Last known location</h3>
-            <h3 class="location"><a href="#">Citadel of Ricks</a></h3>
-        </div>
+        <h3 class="locationLabel">Last known location</h3>
+        <h3 class="location">
+          <a href="/location">{character.location.name}</a>
+        </h3>
+      </div>
     </div>
-
-    <div class="card">
-        <div class="image"></div>
-        <div class="info">
-            <h1 class="name">Evil Rick</h1>
-            <h3 class="status"><div class="dead"></div> Dead - Humanoid</h3>
-
-            <h3 class="locationLabel">Last known location</h3>
-            <h3 class="location"><a href="#">Citadel of Ricks</a></h3>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="image"></div>
-        <div class="info">
-            <h1 class="name">Evil Rick</h1>
-            <h3 class="status"><div class="dead"></div> Dead - Humanoid</h3>
-
-            <h3 class="locationLabel">Last known location</h3>
-            <h3 class="location"><a href="#">Citadel of Ricks</a></h3>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="image"></div>
-        <div class="info">
-            <h1 class="name">Evil Rick</h1>
-            <h3 class="status"><div class="dead"></div> Dead - Humanoid</h3>
-
-            <h3 class="locationLabel">Last known location</h3>
-            <h3 class="location"><a href="#">Citadel of Ricks</a></h3>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="image"></div>
-        <div class="info">
-            <h1 class="name">Evil Rick</h1>
-            <h3 class="status"><div class="dead"></div> Dead - Humanoid</h3>
-
-            <h3 class="locationLabel">Last known location</h3>
-            <h3 class="location"><a href="#">Citadel of Ricks</a></h3>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="image"></div>
-        <div class="info">
-            <h1 class="name">Evil Rick</h1>
-            <h3 class="status"><div class="dead"></div> Dead - Humanoid</h3>
-
-            <h3 class="locationLabel">Last known location</h3>
-            <h3 class="location"><a href="#">Citadel of Ricks</a></h3>
-        </div>
-    </div>
-
+  {/each}
 </div>
